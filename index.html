@@ -271,13 +271,12 @@
 
     <script>
       function loadData () {
-        (async () => {
-          const result = await fetch('https://criptoya.com/api/dai/ars/1000')
+        fetch('https://criptoya.com/api/dai/ars/1000').then(function(result) {
           console.log(JSON.stringify(result))
           const div = document.getElementById("jsonResult")
           console.log(div)
           div.innerHTML = JSON.stringify(result)
-        })()
+        })
       }
     </script>
 
