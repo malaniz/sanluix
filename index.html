@@ -98,10 +98,12 @@
                     (async () => {
                       const result = await fetch('https://criptoya.com/api/dai/ars/1000')
                       console.log(JSON.stringify(result))
+                      document.getElementById("jsonResult").innerHTML = JSON.stringify(result)
                     })()
                   </script>
                 <p>
 
+                <div id="#jsonResult"></div>
                 SanluiX es el grupo de usuarios de Gnu/Linux y Software Libre
                 de la provincia de San Luis. Se encuentra constituido por
                 estudiantes, profesores e interesados por las nuevas
