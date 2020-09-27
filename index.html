@@ -28,10 +28,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" >
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -41,7 +41,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-play-circle"></i>  <span class="light">SanluiX</span> 
+                    <i class="fa fa-play-circle"></i>  <span class="light">SanluiX</span>
                 </a>
             </div>
 
@@ -96,21 +96,23 @@
                 <h2>Quienes Somos</h2>
                 <p>
 
+                
                 SanluiX es el grupo de usuarios de Gnu/Linux y Software Libre
                 de la provincia de San Luis. Se encuentra constituido por
                 estudiantes, profesores e interesados por las nuevas
                 tecnologías que participan ayudando en la difusión,
                 implementación y desarrollos basados en cultura libre y
-                software libre. 
+                software libre.
 
                 <br>
-                
+
                 SanLuix organiza períodicamente distintos tipos de eventos
                 tales como: Jornadas de Software Libre, FLISOL, Software
                 Freedom Day y para el año 2010 fue designado como sede para la
                 realización de las 10mas Jornadas Regionales de Software Libre.
 
-                </p> 
+                </p>
+                
             </div>
         </div>
     </section>
@@ -140,7 +142,7 @@
                 En grupo slots se busca programador web (html, css, php,
                 mysql) para desarrollo y mantenimientos de páginas
                 corporativas de la empresa, debe también tener
-                conocimiento de maqueado.  
+                conocimiento de maqueado.
               </td>
               <td>
                 Desarrollador Web
@@ -161,8 +163,8 @@
             <tr><th>Servicio/producto</th><th>Precio</th><th>Contacto</th></tr>
             <tr>
               <td style="text-align: left">
-                Desarrollo Web dinámico/estático/compilado. 
-                Full Stack Development con AngularJS/Javascript/Python/Nodejs/Mongdb/Mysql. 
+                Desarrollo Web dinámico/estático/compilado.
+                Full Stack Development con AngularJS/Javascript/Python/Nodejs/Mongdb/Mysql.
                 Ionic Mobile Development. Desarrollo de Facturación Electrónica (pyafipws).
                 Seguridad Informática. Penetration Testing.
                 Asesoramiento. Capacitación.
@@ -187,7 +189,7 @@
             </tr>
             <tr>
               <td style="text-align: left">
-                
+
               </td>
               <td>
                 Impresiones 3D.
@@ -204,9 +206,35 @@
 
     </section>
 
-    <!-- Map Section -->
-    <div id="map"></div>	
-
+    <div id="app" style="display: flex; justify-content: center; 
+        align-items: center;
+        flex-direction: column; ">
+        <h2>Cotizaciones de cryptos</h2>
+        <div v-for="(coin,name) in coins"> {{name}}: 
+            <table class="table table-bordered .table-hover"
+                >
+                <thead>
+                <tr>
+                  <th>Exchange</th>
+                  <th>P Compra</th>
+                  <th>P Compra final</th>
+                  <th>P Venta</th>
+                  <th>P Venta final</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(v,n,i) in coin" :key="i" >
+                    <td> {{n}} </td> 
+                    <td> {{v.ask}} </td>
+                    <td> {{v.totalAsk}} </td>
+                    <td> {{v.bid}} </td>
+                    <td> {{v.totalBid}} </td>
+                </tr>
+                </tbody> 
+            </table>
+        </div>
+    </div>
+    
 
     <!-- Contact Section -->
     <section id="contact" class="container content-section text-center">
@@ -214,7 +242,7 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contacto</h2>
                 <p>No dude en enviarnos un correo electrónico para proporcionar alguna información, darnos sugerencias, o solamente saludar!</p>
-		<p>IRC <br>Servidor: freenode.net<br>Canal: #sanluix</p>                
+		<p>IRC <br>Servidor: freenode.net<br>Canal: #sanluix</p>
 		<p>Se puede acceder via <a href="http://webchat.freenode.net/?channels=sanluix" target="_black">web</a> o usando un cliente de IRC como: irssi, weechat, xchat, pidgin, kopete...</p>
 		<p><a href="mailto:slx-sl@googlegroups.com">slx-sl@googlegroups.com</a>
                 </p>
@@ -253,20 +281,48 @@
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
 
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7tUil0HE1d2P5rWkD97O4L_Nph14EIhU&sensor=false"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
+    
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        var app = new Vue({
+            el: '#app',
+            data: {
+                coins:{
+                    Ether:{},
+                    Bitcoin:{},
+                    Dai:{}
+                }
+            },
+            created: function () {      
+                this.fetchData()
+            },
+            methods:{
+                fetchData: function(){
 
-        ga('create', 'UA-54135369-1', 'auto');
-        ga('send', 'pageview');
-    </script>    
+                    fetch('https://criptoya.com/api/eth/ars/1000')
+                    .then(response => response.json())
+                    .then( (result) => {
+                        this.coins.Ether=result;
+                        //console.log(result);
+                    });
+
+                    fetch('https://criptoya.com/api/btc/ars/1000')
+                    .then(response => response.json())
+                    .then( (result) => {
+                        this.coins.Bitcoin=result;
+                        //console.log(result);                      
+                    });
+                    fetch('https://criptoya.com/api/dai/ars/1000')
+                    .then(response => response.json())
+                    .then( (result) => {
+                        this.coins.Dai=result;
+                        //console.log(result);                      
+                    })
+                }
+            }
+        })
+    </script>
 
 </body>
 
