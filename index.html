@@ -28,16 +28,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-      function loadData () {
-        (async () => {
-          const result = await fetch('https://criptoya.com/api/dai/ars/1000')
-          console.log(JSON.stringify(result))
-          document.getElementById("jsonResult").innerHTML = JSON.stringify(result)
-        })()
-      }
-    </script>
-
 
 </head>
 
@@ -278,6 +268,19 @@
         ga('create', 'UA-54135369-1', 'auto');
         ga('send', 'pageview');
     </script>
+
+    <script>
+      function loadData () {
+        (async () => {
+          const result = await fetch('https://criptoya.com/api/dai/ars/1000')
+          console.log(JSON.stringify(result))
+          const div = document.getElementById("jsonResult")
+          console.log(div)
+          div.innerHTML = JSON.stringify(result)
+        })()
+      }
+    </script>
+
 
 </body>
 
